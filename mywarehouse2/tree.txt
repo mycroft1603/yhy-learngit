@@ -1,0 +1,31 @@
+void level(BTNode *p)
+{
+    int front, rear;
+    BTNode *que[maxSize];   // 定义一个循环队列，用来记录要访问的层次上的结点
+    BTNode *q;
+    front = rear = 0;
+
+    if(p)
+    {
+        rear = (rear+1) % maxSize;
+        que[rear] = p;  // 根节点入队
+        while(front != rear)    // 当队列不为空时进行循环
+        {
+            front = (front+1) % maxSize;
+            q = que[front];     // 队头结点出队
+            visit[q];       // 访问队头结点
+
+            if(q -> lchild)
+            {
+                rear = (rear+1) % maxSize;
+                que[rear] = q -> lchild;
+            }
+
+            if(q->rchild)
+            {
+                rear = (rear+1) % maxSize;
+                que[rear] = q -> rchild;
+            }
+        }
+    }
+}
